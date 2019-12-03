@@ -13,52 +13,6 @@ import { isArray } from "util";
 
 var station = { ...stations };
 var shows = { ...data1, ...data2, ...data3, ...data4, ...data5, ...data6 };
-function m() {
-  if (shows && isArray) {
-    console.log(shows.result, "spot");
-    const t = shows.result;
-    // console.log(t, 'splice')
-    Object.values(t).forEach(value => {
-      console.log(value["channelID"], "sway");
-      return value["groupID"];
-    });
-
-    Object.values(t).map(value => {
-      console.log(value["groupID"], "odd");
-      return value["groupID"];
-    });
-  }
-}
-
-m();
-const Shows = props => (
-  <Fragment>
-    <section className="item-center">
-      <div className="shows">
-        <div className="grid-items">
-          <div className="item">
-            <small>{props.time}</small>
-            <small>{props.resolution}</small>
-          </div>
-          <div className="item-name">{props.showTitle}</div>
-        </div>
-      </div>
-    </section>
-  </Fragment>
-);
-
-const Channels = props => (
-  <Fragment>
-    <section className="left-menus">
-      <div className="left-items">
-        <div>
-          <img src={props.channel} alt="" />
-          <h5>HD</h5>
-        </div>
-      </div>
-    </section>
-  </Fragment>
-);
 
 class Contents extends React.Component {
   constructor(){
@@ -69,16 +23,19 @@ class Contents extends React.Component {
   shows = { ...data1, ...data2, ...data3, ...data4, ...data5, ...data6 };
   trans(){
     Object.values(station.result.channels).map(value => {
-      console.log(value["groupID"], "odgdggddgdd");
       return value["groupID"];
     });
   }
   render() {
+    // const stat = JSON.parse(...stat, station.result.channels);
+    station.result.channels.forEach((item) =>{
+    console.log(item);
+    });
     return (
       <Fragment>
         <TopNavBar />
         <BottomNavBar />
-        <div className="row">
+        <Fragment>
           <section className="left-menus">
             <div className="left-items">
               {Object.values(station.result.channels).map(value => (
@@ -93,23 +50,20 @@ class Contents extends React.Component {
           </section>
           
           <section className="item-center">
-            
-              {
-                Object.values(shows.result).map(value => (
-                  <div className="shows">{
-                    <div className="grid-items">
-                  <div className="item">
-                    <small>{value.startime}</small>
-                    <small>value.resolution</small>
-                  </div>
-                  <div className="item-name">{value.title}</div>
-                  </div>
-                  }
-                
-                </div>))}
+            {station.result.channels.map(channel=><div className="shows" key={channel['groupID']}>
+              {shows.result.map(item=><Fragment>
+                {item['channelID'] === channel['groupID'] && <div className='grid-items' key={item['showID']}>
+                <div className='item'>
+                  <small>19:45</small>
+                <small></small>
+                </div>
+              <div className='item-name'>{item['title']}</div>
+              </div>}
+              </Fragment>)}
+            </div>)}
             
           </section>
-        </div>
+        </Fragment>
       </Fragment>
     );
   }

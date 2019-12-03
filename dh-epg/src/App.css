@@ -99,6 +99,7 @@ ul {
   top: 0;
   margin-top: 100px;
   z-index: 50;
+  overflow: auto;
 }
 .left-items div {
   padding: 10px;
@@ -154,14 +155,15 @@ ul {
   font-size: 15px;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
-.item-center::-webkit-scrollbar {
+.item-center::-webkit-scrollbar, .left-menus::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE and Edge */
-.item-center {
+.item-center, .left-menus {
   -ms-overflow-style: none;
 }
+
 .app-footer{
     position: fixed;
     bottom: 0;
