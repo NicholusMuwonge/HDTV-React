@@ -15,26 +15,35 @@ var station = { ...stations };
 var shows = { ...data1, ...data2, ...data3, ...data4, ...data5, ...data6 };
 
 class Contents extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.trans = this.trans.bind(this);
   }
   station = { ...stations };
   shows = { ...data1, ...data2, ...data3, ...data4, ...data5, ...data6 };
-  trans(){
+  trans() {
     Object.values(station.result.channels).map(value => {
       return value["groupID"];
     });
   }
+
+  colorAccent = () => {
+    Array.prototype.random = function(length) {
+      return this[Math.floor(Math.random() * length)];
+    };
+
+    var teams = ["yellow",  "teal", "wheat", 'blueviolet'];
+    var chosen_team = teams.random(teams.length);
+    return (chosen_team);
+  };
   render() {
-    // const stat = JSON.parse(...stat, station.result.channels);
-    station.result.channels.forEach((item) =>{
-    console.log(item);
+    station.result.channels.forEach(item => {
+      console.log(item);
     });
     return (
       <Fragment>
         <TopNavBar />
-        <BottomNavBar />
+        
         <Fragment>
           <section className="left-menus">
             <div className="left-items">
@@ -48,22 +57,38 @@ class Contents extends React.Component {
               ))}
             </div>
           </section>
-          
+
           <section className="item-center">
-            {station.result.channels.map(channel=><div className="shows" key={channel['groupID']}>
-              {shows.result.map(item=><Fragment>
-                {item['channelID'] === channel['groupID'] && <div className='grid-items' key={item['showID']}>
-                <div className='item'>
-                  <small>19:45</small>
-                <small></small>
-                </div>
-              <div className='item-name'>{item['title']}</div>
-              </div>}
-              </Fragment>)}
-            </div>)}
-            
+            {station.result.channels.map(channel => (
+              <div
+                className="shows"
+                data-aos="fadeInUp easeOutDown"
+                data-aos-delay="30"
+                data-aos-duration="800"
+                data-aos-easing="ease-in-out"
+                data-aos-once="false"
+                key={channel["groupID"]}
+              >
+                {shows.result.map(item => (
+                  <Fragment>
+                    {item["channelID"] === channel["groupID"] && (
+                      <div className="grid-items" 
+                      style={{borderLeft: `3px solid ${this.colorAccent()}`}}
+                      key={item["showID"]}>
+                        <div className="item">
+                          <small>19:45</small>
+                          <small></small>
+                        </div>
+                        <div className="item-name">{item["title"]}</div>
+                      </div>
+                    )}
+                  </Fragment>
+                ))}
+              </div>
+            ))}
           </section>
         </Fragment>
+        <BottomNavBar />
       </Fragment>
     );
   }
