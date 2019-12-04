@@ -52,6 +52,7 @@ ul {
 
 .navbar-bottom li:first-child {
   padding-left: 30px;
+  font-size: 1.2rem;
 }
 
 .navbar li:last-child div {
@@ -183,15 +184,6 @@ ul {
   margin-top: 5px;
   font-size: 15px;
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
-/* .shows::-webkit-scrollbar {
-  display: none;
-}
-
-
-.item-center, .left-menus,.shows {
-  -ms-overflow-style: none;
-} */
 
 ::-webkit-scrollbar {
   width: 0px; /* Remove scrollbar space */
@@ -306,7 +298,7 @@ ul {
     width: 30%;
   }
   .item-center {
-    margin-left: 26px;
+    margin-left: 39px;
   }
 
   .footer-action {
@@ -314,6 +306,7 @@ ul {
   }
   #time {
     display: unset;
+    margin-left: 1rem;
   }
   #gear {
     display: initial;
@@ -359,7 +352,6 @@ ul {
   }
 }
 
-
 @media screen and (max-width: 320px) {
   .item-center {
     margin-left: 15px;
@@ -371,7 +363,6 @@ ul {
   .left-menus {
     width: 30%;
   }
-  
 
   .footer-action {
     display: none;

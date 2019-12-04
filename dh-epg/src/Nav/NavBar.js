@@ -1,7 +1,6 @@
 import React from "react";
 import "../App.css";
 
-
 const TopNavBar = () => (
   <header>
     <nav className="navbar">
@@ -18,7 +17,7 @@ const TopNavBar = () => (
         </li>
         <li>
           <div className="buttons">
-          <i className="fa fa-cog" id='gear' aria-hidden="true"></i>
+            <i className="fa fa-cog" id="gear" aria-hidden="true"></i>
             <button>
               <i className="fa fa-cog" aria-hidden="true"></i>SENDERLISTE
             </button>

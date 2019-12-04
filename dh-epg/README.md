@@ -1,10 +1,14 @@
-Url Shortner
+EPG GRID
 
-
-This is a URL shortnening App. I created it Via The FrontEnd Mentor with a key 
-objective of learning React Hooks and Minimalist Designing.
+This is a simple simple clone of a native tv show application
 
 ```
-A demo can be found via https://re-short.herokuapp.com/
+A demo can be found via https://epg-grid.herokuapp.com/
 
 ```
+
+How to set it up:
+
+- run npm i
+- cd into dh-epg
+- run npm start.

@@ -15,18 +15,6 @@ var station = { ...stations };
 var shows = { ...data1, ...data2, ...data3, ...data4, ...data5, ...data6 };
 
 class Contents extends React.Component {
-  constructor() {
-    super();
-    this.trans = this.trans.bind(this);
-  }
-  station = { ...stations };
-  shows = { ...data1, ...data2, ...data3, ...data4, ...data5, ...data6 };
-  trans() {
-    Object.values(station.result.channels).map(value => {
-      return value["groupID"];
-    });
-  }
-
   colorAccent = () => {
     Array.prototype.random = function(length) {
       return this[Math.floor(Math.random() * length)];
@@ -37,18 +25,41 @@ class Contents extends React.Component {
     return chosen_team;
   };
 
-  handleHorizontalScroll = (position, previousPosition) => {
-    const diffScroll = position - previousPosition;
-    const direction = diffScroll > 0 ? "right" : "left";
-
-    console.log(`Scroll ${direction} to ${position}`);
-    
-  };
+  handleTimeSplitting(timeString) {
+    if (timeString === 0) {
+      return "00:00";
+    } else {
+      if (timeString.toString().length === 3) {
+        const string =
+          timeString.toString().slice(0, 1) +
+          ":" +
+          timeString.toString().slice(1, 4);
+        return string;
+      } else if (timeString.toString().length > 3) {
+        const string =
+          timeString.toString().slice(0, 2) +
+          ":" +
+          timeString.toString().slice(2, 5);
+        return string;
+      } else if (timeString.toString().length === 2) {
+        const string =
+          timeString.toString().slice(0, 1) +
+          ":" +
+          timeString.toString().slice(1, 4) +
+          "0";
+        return string;
+      } else if (timeString.toString().length === 1) {
+        const string =
+          timeString.toString().slice(0, 1) +
+          ":" +
+          timeString.toString().slice(1, 4) +
+          "00";
+        return string;
+      }
+    }
+  }
 
   render() {
-    station.result.channels.forEach(item => {
-      console.log(item);
-    });
     return (
       <Fragment>
         <TopNavBar />
@@ -56,16 +67,14 @@ class Contents extends React.Component {
         <Fragment>
           <section className="left-menus">
             <div className="left-items">
-              
-                {Object.values(station.result.channels).map(value => (
-                  <div>
-                    <img
-                      src={`https://cdn.hd-plus.de/senderlogos/bright-cropped/${value["groupID"]}.png`}
-                      alt=""
-                    />
-                  </div>
-                ))}
-             
+              {Object.values(station.result.channels).map((value, key) => (
+                <div key={key}>
+                  <img
+                    src={`https://cdn.hd-plus.de/senderlogos/bright-cropped/${value["groupID"]}.png`}
+                    alt=""
+                  />
+                </div>
+              ))}
             </div>
           </section>
 
@@ -74,31 +83,33 @@ class Contents extends React.Component {
               onReachLeft={f => f}
               onReachRight={f => f}
               position={70}
-              onScroll={this.handleHorizontalScroll}
               horizontal
             >
-              {station.result.channels.map(channel => (
+              {station.result.channels.map((channel, key) => (
                 <div
+                  key={key}
                   className="shows"
                   data-aos="fadeInUp zoomOutDown"
-                  data-aos-delay="30"
-                  data-aos-duration="800"
+                  data-aos-delay="70"
+                  data-aos-duration="900"
                   data-aos-easing="ease-in-out"
                   data-aos-once="false"
                   key={channel["groupID"]}
                 >
-                  {shows.result.map(item => (
-                    <Fragment>
+                  {shows.result.map((item, key) => (
+                    <Fragment key={key}>
                       {item["channelID"] === channel["groupID"] && (
                         <div
+                          key={key}
                           className="grid-items"
                           style={{
                             borderLeft: `2px solid ${this.colorAccent()}`
                           }}
-                          key={item["showID"]}
                         >
                           <div className="item">
-                            <small>19:45</small>
+                            <small>
+                              {this.handleTimeSplitting(item["startTime"])}
+                            </small>
                             <small></small>
                           </div>
                           <div className="item-name">{item["title"]}</div>
@@ -111,9 +122,7 @@ class Contents extends React.Component {
             </InfiniteScroll>
           </section>
         </Fragment>
-        <Fragment>
         <BottomNavBar />
-        </Fragment>
       </Fragment>
     );
   }
